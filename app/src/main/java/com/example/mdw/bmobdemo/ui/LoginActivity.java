@@ -18,7 +18,13 @@ import cn.bmob.v3.listener.LogInListener;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
+    /**
+     * 手机
+     */
     private EditText phoneEt;
+    /**
+     * 密码
+     */
     private EditText passwordEt;
 
     private String password,phone;
@@ -61,8 +67,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         if (user != null) {
                             toast("登录成功");
                             BmobApplication.user = user;
-                            intent2Activity(MainActivity.class);
-                            AppManager.getAppManager().finishActivity(LoginActivity.class);
+                            AppManager.getAppManager().finishAllActivity();
+
+                            intent2Activity(SplashActivity.class);
+
                         }else{
                             toast("登录失败"+e.getMessage());
                         }

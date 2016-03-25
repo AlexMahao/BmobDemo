@@ -73,11 +73,9 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 user.signOrLogin(this, authCode, new SaveListener() {
                     @Override
                     public void onSuccess() {
-                        AppManager.getAppManager().finishActivity(LoginActivity.class);
                         toast("注册成功");
-                        intent2Activity(LoginActivity.class);
-                        AppManager.getAppManager().finishActivity(RegistActivity.class);
-
+                        AppManager.getAppManager().finishAllActivity();
+                        intent2Activity(SplashActivity.class);
                     }
 
                     @Override
@@ -105,6 +103,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                         }
                     }
                 });
+
                 break;
         }
     }

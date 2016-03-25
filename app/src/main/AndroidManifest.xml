@@ -54,6 +54,10 @@
         <activity
             android:name=".ui.ResetPasswordActivity"
             android:label="Reset Password"/>
+
+        <activity android:name=".ui.ShowUserActivity"
+            android:label="个人信息"
+            />
     </application>
 
 

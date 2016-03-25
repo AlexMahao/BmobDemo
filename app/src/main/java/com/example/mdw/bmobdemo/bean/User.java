@@ -8,4 +8,14 @@ import cn.bmob.v3.BmobUser;
  */
 public class User extends BmobUser {
 
+
+    private String userIcon;
+
+    public String getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
+    }
 }

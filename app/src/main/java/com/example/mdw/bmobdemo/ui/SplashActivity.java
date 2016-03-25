@@ -1,49 +1,46 @@
 package com.example.mdw.bmobdemo.ui;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.animation.AlphaAnimation;
-import android.widget.TextView;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.mdw.bmobdemo.BaseActivity;
 import com.example.mdw.bmobdemo.BmobApplication;
 import com.example.mdw.bmobdemo.R;
-import com.example.mdw.bmobdemo.bean.User;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
-import cn.bmob.v3.BmobUser;
+public class SplashActivity extends BaseActivity implements View.OnClickListener {
 
-public class SplashActivity extends BaseActivity {
-
-
-    private TextView text;
+    private ImageView mAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-
-        text = ((TextView) findViewById(R.id.text));
+        setContentView(R.layout.more);
 
 
-        AlphaAnimation anim = new AlphaAnimation(0.0f,1f);
-        anim.setDuration(2500);
 
-        text.startAnimation(anim);
+        mAvatar = ((ImageView) findViewById(R.id.more_avatar));
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                User user =  BmobUser.getCurrentUser(SplashActivity.this, User.class);
-                if(user!=null){
-                    BmobApplication.user = user;
-                    intent2Activity(MainActivity.class);
-                }else{
-                    intent2Activity(LoginActivity.class);
-                }
-                finish();
+        if ( BmobApplication.user == null) {
+            //未登录或注册
+        } else {
+            if (!TextUtils.isEmpty( BmobApplication.user.getUserIcon())) {
+                ImageLoader.getInstance().displayImage( BmobApplication.user.getUserIcon(), mAvatar);
             }
-        },3000);
+        }
 
+        mAvatar.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if ( BmobApplication.user == null) {
+          intent2Activity(LoginActivity.class);
+        }else{
+            intent2Activity(ShowUserActivity.class);
+        }
     }
 }
