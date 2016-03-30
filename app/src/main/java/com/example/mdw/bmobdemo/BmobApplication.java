@@ -22,17 +22,13 @@ public class BmobApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-
-        Bmob.initialize(this, "401fd17e87ab16fede536a0d5cbc702d");
+        Bmob.initialize(this, "your Bmob key");
 
         BmobInstallation.getCurrentInstallation(this).save();
 
         user = BmobUser.getCurrentUser(this, User.class);
 
         initImageLoader();
-
-        // 启动推送服务
-       // BmobPush.startWork(this, "7df58d00c6689af835efc2dbdf376775");
 
     }
 
